@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
+	</head>
+
+	<body>
+		<div ng-app='TagAlong' ng-controller='DataController' ng-cloak>
+			<md-content layout='padding'>
+			<md-grid-list md-cols-sm="12" md-cols-md="12" md-cols-gt-md="12" md-row-height-gt-md="4:3" md-row-height="4:3" md-gutter="10px" md-gutter-gt-sm="10px" flex>
+			 <md-grid-tile ng-repeat='event in concertData' ng-hide='{{event.ticket_status === "unavailable"}}' md-colspan="4" md-colspan-sm="4" md-colspan-md="4" md-colspan-gt-md="4">
+				<md-card>
+					<md-card-actions>
+						<md-button ng-href='{{event.venue.url}}' class='md-primary'>{{event.venue.name | uppercase}}</md-button>
+						<div ng-repeat='artist in event.artists'>
+							<md-button ng-href='{{artist.url}}'>{{artist.name | uppercase}}</md-button>
+						</div>
+						<p class='date'>{{event.datetime | date:'MM/dd/yyyy @  h:mma'}}</p>
+						<md-button ng-href='{{event.ticket_url}}'>Buy Tickets</md-button>
+					</md-card-actions>
+			</md-grid-tile>
+			</md-grid-list>
+			</md-content>
+		</div>
+
+
+		<!--Bower dependencies-->
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-aria/angular-aria.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.js"></script>
+		<script src="bower_components/angular-material/angular-material.js"></script>
+		
+		<!--App file-->
+		<script src="app.js"></script>
+
+		<!--Controller files-->
+		<script src="dataController.js"></script>
+
+		<!--Services Files-->
+		<script src="concertDataService.js"></script>
+	</body>
+
+</html>
